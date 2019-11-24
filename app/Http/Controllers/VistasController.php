@@ -101,4 +101,22 @@ class VistasController extends Controller
         $vista->delete();
         return redirect('vistas');
     }
+
+    public function rsvpYes(Request $request, Vista $vista)
+    {
+        $vista->rsvpYes();
+        return [
+            'yes' => $vista->rsvp_yes,
+            'no' => $vista->rsvp_no,
+        ];
+    }
+
+    public function rsvpNo(Request $request, Vista $vista)
+    {
+        $vista->rsvpNo();
+        return [
+            'yes' => $vista->rsvp_yes,
+            'no' => $vista->rsvp_no,
+        ];
+    }
 }

@@ -30,3 +30,6 @@ Route::delete('/vistas/{vista}', 'VistasController@destroy');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('vistas/{vista}/rsvp_yes', 'VistasController@rsvpYes');
+Route::get('vistas/{vista}/rsvp_no', 'VistasController@rsvpNo');
