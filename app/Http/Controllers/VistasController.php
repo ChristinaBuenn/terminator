@@ -33,7 +33,7 @@ class VistasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,19 +54,19 @@ class VistasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Vista  $vista
+     * @param \App\Vista $vista
      * @return \Illuminate\Http\Response
      */
     public function show(Vista $vista)
     {
 
-        return view('vista', ['vista' => $vista] );
+        return view('vista', ['vista' => $vista]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Vista  $vista
+     * @param \App\Vista $vista
      * @return \Illuminate\Http\Response
      */
     public function edit(Vista $vista)
@@ -77,8 +77,8 @@ class VistasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vista  $vista
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Vista $vista
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Vista $vista)
@@ -87,13 +87,13 @@ class VistasController extends Controller
         $vista->body = request('body');
         $vista->date = request('date');
         $vista->save();
-        return redirect('vistas/'.$vista->hash);
+        return redirect('vistas/' . $vista->hash);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Vista  $vista
+     * @param \App\Vista $vista
      * @return \Illuminate\Http\Response
      */
     public function destroy(Vista $vista)
@@ -104,7 +104,9 @@ class VistasController extends Controller
 
     public function rsvpYes(Request $request, Vista $vista)
     {
-        $vista->rsvpYes();
+        $previous = $request->session()->get('rsvp_' . $vista->hash, 'none');
+        $vista->rsvpYes($previous);
+        $request->session()->put('rsvp_' . $vista->hash, 'yes');
         return [
             'yes' => $vista->rsvp_yes,
             'no' => $vista->rsvp_no,
@@ -113,7 +115,9 @@ class VistasController extends Controller
 
     public function rsvpNo(Request $request, Vista $vista)
     {
-        $vista->rsvpNo();
+        $previous = $request->session()->get('rsvp_' . $vista->hash, 'none');
+        $vista->rsvpNo($previous);
+        $request->session()->put('rsvp_' . $vista->hash, 'no');
         return [
             'yes' => $vista->rsvp_yes,
             'no' => $vista->rsvp_no,

@@ -18,15 +18,25 @@ class Vista extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function rsvpYes()
+    public function rsvpYes($previous)
     {
-        $this->rsvp_yes++;
+        if ($previous == 'no') {
+            $this->rsvp_no--;
+        }
+        if ($previous != 'yes') {
+            $this->rsvp_yes++;
+        }
         $this->save();
     }
 
-    public function rsvpNo()
+    public function rsvpNo($previous)
     {
-        $this->rsvp_no++;
+        if ($previous == 'yes') {
+            $this->rsvp_yes--;
+        }
+        if ($previous != 'no') {
+            $this->rsvp_no++;
+        }
         $this->save();
     }
 }
