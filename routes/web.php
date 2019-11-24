@@ -12,5 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $name = request('name');
+    return view('welcome', [
+        'name' => $name
+    ]);
 });
+
+Route::get('/vistas', 'VistasController@index');
+Route::get('/vistas/create', 'VistasController@create');
+Route::get('/vistas/{vista}', 'VistasController@show');
+Route::post('/vistas', 'VistasController@store');
+Route::get('/vistas/{vista}/edit', 'VistasController@edit');
+Route::put('/vistas/{vista}', 'VistasController@update');
+Route::delete('/vistas/{vista}', 'VistasController@delete');
