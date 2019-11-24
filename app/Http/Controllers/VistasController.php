@@ -38,14 +38,12 @@ class VistasController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $vista = new Vista([
             'title' => $request->get('title'),
+            'user_id' => Auth::user()->id,
             'body' => $request->get('body'),
             'date' => $request->get('date'),
             'hash' => substr(uniqid(), -7),
-
         ]);
         $vista->save();
         return redirect('vistas/' . $vista->hash);

@@ -20,16 +20,14 @@ Route::get('/', function () {
 });
 
 Route::get('/vistas', 'VistasController@index')->middleware('auth');
-Route::get('/vistas/create', 'VistasController@create');
+Route::get('/vistas/create', 'VistasController@create')->middleware('auth');
 Route::get('/vistas/{vista}', 'VistasController@show');
-Route::post('/vistas', 'VistasController@store');
-Route::get('/vistas/{vista}/edit', 'VistasController@edit');
-Route::put('/vistas/{vista}', 'VistasController@update');
-Route::delete('/vistas/{vista}', 'VistasController@destroy');
+Route::post('/vistas', 'VistasController@store')->middleware('auth');
+Route::get('/vistas/{vista}/edit', 'VistasController@edit')->middleware('auth');
+Route::put('/vistas/{vista}', 'VistasController@update')->middleware('auth');
+Route::delete('/vistas/{vista}', 'VistasController@destroy')->middleware('auth');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('vistas/{vista}/rsvp_yes', 'VistasController@rsvpYes');
 Route::get('vistas/{vista}/rsvp_no', 'VistasController@rsvpNo');

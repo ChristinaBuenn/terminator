@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vista extends Model
 {
-    protected $fillable = ['title', 'body', 'date', 'hash',];
+    protected $fillable = ['title', 'body', 'date', 'hash', 'user_id'];
 
     public function getRouteKeyName()
     {
