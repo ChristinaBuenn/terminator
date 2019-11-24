@@ -15,11 +15,20 @@ class CreateVistasTable extends Migration
     {
         Schema::create('vistas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('hash');
             $table->string('title', 255);
             $table->text('body');
             $table->date('date');
+            $table->integer('rsvp_yes')
+                ->default(0);
+            $table->integer('rsvp_no')
+                ->default(0);
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

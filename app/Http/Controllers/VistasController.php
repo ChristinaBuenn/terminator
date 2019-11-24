@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Vista;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VistasController extends Controller
 {
@@ -14,7 +15,7 @@ class VistasController extends Controller
      */
     public function index()
     {
-        $vistas = Vista::all();
+        $vistas = Auth::user()->vistas;
 
         return view('vistas.list', ['vistas' => $vistas]);
     }

@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="list-group">
         @foreach($vistas as $vista)
         <a href="/vistas/{{$vista->hash}}" class="list-group-item list-group-item-action flex-column align-items-start">

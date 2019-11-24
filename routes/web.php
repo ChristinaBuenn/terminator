@@ -19,10 +19,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/vistas', 'VistasController@index');
+Route::get('/vistas', 'VistasController@index')->middleware('auth');
 Route::get('/vistas/create', 'VistasController@create');
 Route::get('/vistas/{vista}', 'VistasController@show');
 Route::post('/vistas', 'VistasController@store');
 Route::get('/vistas/{vista}/edit', 'VistasController@edit');
 Route::put('/vistas/{vista}', 'VistasController@update');
-Route::delete('/vistas/{vista}', 'VistasController@delete');
+Route::delete('/vistas/{vista}', 'VistasController@destroy');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
